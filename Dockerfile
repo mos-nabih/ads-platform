@@ -9,4 +9,7 @@ COPY . .
 
 EXPOSE 8000
 
+ARG APP_VERSION=development
+ENV APP_VERSION=$APP_VERSION
+
 CMD ["python", "run.py"]
