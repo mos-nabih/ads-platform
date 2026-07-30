@@ -1,6 +1,6 @@
 # Ads Platform
 
-A minimal python application.
+A minimal python application with **focus** on infrastructure.
 
 * AWS
 * Terraform
@@ -21,11 +21,11 @@ A minimal python application.
 * GitHub Actions
 * CI/CD Pipelines
 * Continuous Deployment
-* Cloudflare
-* Content Delivery Networks (CDN)
-* TLS / SSL
-* DNS
-* HTTPS
+* Cloudflare -> todo
+* Content Delivery Networks (CDN) -> todo
+* TLS / SSL -> todo
+* DNS -> todo
+* HTTPS -> todo
 * AWS IAM
 * Security Groups
 * Virtual Private Clouds (VPC)
