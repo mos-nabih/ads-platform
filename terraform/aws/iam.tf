@@ -23,3 +23,31 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
 
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
+
+resource "aws_iam_role_policy" "ecs_task_execution_ssm" {
+  name = "ads-platform-ecs-ssm-access"
+  role = aws_iam_role.ecs_task_execution_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = ["ssm:GetParameters"]
+        Resource = [aws_ssm_parameter.database_url.arn]
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["kms:Decrypt"]
+        Resource = "*"
+
+        Condition = {
+          StringEquals = {
+            "kms:ViaService" = "ssm.eu-central-1.amazonaws.com"
+          }
+        }
+      }
+    ]
+  })
+}
