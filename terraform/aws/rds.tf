@@ -91,3 +91,13 @@ resource "aws_db_instance" "postgres" {
 output "rds_endpoint" {
   value = aws_db_instance.postgres.endpoint
 }
+
+resource "aws_ssm_parameter" "database_url" {
+  name  = "/ads-platform/database_url"
+  type  = "SecureString"
+  value = "postgresql://ads_user:${var.db_password}@${aws_db_instance.postgres.address}:5432/ads_platform"
+
+  tags = {
+    Name = "ads-platform-database-url"
+  }
+}

@@ -52,10 +52,13 @@ resource "aws_ecs_task_definition" "app" {
         {
           name  = "APP_PORT"
           value = "8000"
-        },
+        }
+      ]
+
+      secrets = [
         {
-          name = "DATABASE_URL"
-          value = "postgresql://ads_user:${var.db_password}@${aws_db_instance.postgres.address}:5432/ads_platform"
+          name      = "DATABASE_URL"
+          valueFrom = aws_ssm_parameter.database_url.arn
         }
       ]
     }
